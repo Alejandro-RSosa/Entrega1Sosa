@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block compartido %} 
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for n in snacks %}
+      <tr>
+        <th scope="row">{{n.id}}</th>
+        <td>{{n.nombre}}</td>
+        <td>{{n.desc}}</td>
+        <td>{{n.precio}}</td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
