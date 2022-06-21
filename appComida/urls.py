@@ -1,5 +1,7 @@
+from telnetlib import LOGOUT
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.inicio, name="inicio"),
@@ -19,5 +21,9 @@ urlpatterns = [
     path("editar_gatos/<int:id>", views.editarG, name="editar_gatos"),
     path("editar_gatos", views.editarG, name="editar_gatos"),
     path("editar_snacks/<int:id>", views.editarS, name="editar_snacks"),
-    path("editar_snacks", views.editarS, name="editar_snacks")
+    path("editar_snacks", views.editarS, name="editar_snacks"),
+    path("login", views.login_request, name="Login"),
+    path("register", views.register, name="Register"),
+    path("logout", LogoutView.as_view(template_name="logout.html"), name="Logout"),
+    
 ]

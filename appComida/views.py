@@ -1,8 +1,12 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
+from cmath import log
+from django.http import HttpResponse
+from django.shortcuts import render
 from appComida.models import Perros, Gatos, Snacks
 from django.template import loader
 from appComida.forms import Form_comida
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -30,6 +34,7 @@ def snacks(request):
     doc = plantilla.render(dicc)
     return HttpResponse (doc)
 
+@login_required
 def comida_perro(request):
 
     if request.method == "POST":
@@ -45,6 +50,7 @@ def comida_perro(request):
     
     return render( request, "alta_perro.html")
 
+@login_required
 def comida_gato(request):
 
     if request.method == "POST":
@@ -60,6 +66,7 @@ def comida_gato(request):
     
     return render( request, "alta_gato.html")
 
+@login_required
 def comida_snacks(request):
 
     if request.method == "POST":
@@ -87,6 +94,8 @@ def buscar(request):
     else:
         return HttpResponse("No se encontro ese alimento")
 
+
+@login_required
 def elimina_perros(request, id):
 
     comida = Perros.objects.get(id=id)
@@ -185,3 +194,43 @@ def editarS(request, id):
         mi_form = Form_comida(initial={'nombre':comida.nombre, 'desc':comida.desc, 'precio':comida.precio})
 
     return render(request, "editar_snacks.html", {"mi_form":mi_form, "comida":comida})
+
+def login_request(request):
+
+    if request.method == "POST":
+
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():
+
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request,user)
+                return render(request, "inicio_UsuarioLogueado.html", {"mensaje":f"{username}"})
+
+        else:
+            return HttpResponse("Usuario incorrecto")
+
+    form = AuthenticationForm()
+
+    return render(request, "login.html", {"form":form})
+
+def register(request):
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+            return HttpResponse("Usuario creado")
+
+    else:
+        form = UserCreationForm()
+    return render(request,"registro.html",{"form":form})
+
+
