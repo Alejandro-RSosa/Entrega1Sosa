@@ -55,7 +55,7 @@ ROOT_URLCONF = 'Entrega1Sosa.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/Trico/Desktop/ProyectoFinal/Entrega1Sosa/appComida/template'],
+        'DIRS': ['C:/Users/Trico/Desktop/Entrega1Sosa/appComida/template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -10,5 +10,14 @@ urlpatterns = [
     path('alta_gato', views.comida_gato, name="alta_gato"),
     path('alta_snacks', views.comida_snacks, name="alta_snacks"),
     path("buscar_comida", views.buscar_comida, name="buscar_comida"),
-    path("buscar", views.buscar)
+    path("buscar", views.buscar),
+    path("elimina_perros/<int:id>", views.elimina_perros, name="elimina_perros"),
+    path("elimina_gatos/<int:id>", views.elimina_gatos, name="elimina_gatos"),
+    path("elimina_snacks/<int:id>", views.elimina_snacks, name="elimina_snacks"),
+    path("editar_perros/<int:id>", views.editarP, name="editar_perros"),
+    path("editar_perros", views.editarP, name="editar_perros"),
+    path("editar_gatos/<int:id>", views.editarG, name="editar_gatos"),
+    path("editar_gatos", views.editarG, name="editar_gatos"),
+    path("editar_snacks/<int:id>", views.editarS, name="editar_snacks"),
+    path("editar_snacks", views.editarS, name="editar_snacks")
 ]

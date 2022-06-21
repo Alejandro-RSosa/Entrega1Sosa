@@ -20,9 +20,14 @@
         <td>{{n.nombre}}</td>
         <td>{{n.desc}}</td>
         <td>{{n.precio}}</td>
+        <td><a href="{% url 'editar_perros' n.id %}">Editar</a></td>
+        <td><a href="{% url 'elimina_perros' n.id %}">Eliminar</a></td>
       </tr>
         {% endfor %}
     </tbody>
   </table>
+  <button>
+    <a href="alta_perro">Agregar Comida</a>
+  </button>
 
 {% endblock %}
